@@ -21,12 +21,13 @@ git clone https://github.com/sarahshields77/Group9COMP308Project.git
 cd Group9COMP308Project
 ```
 
-2. Install dependencies for Backend.   
+2. Install dependencies for Backend.     
    In the `server/auth-service` directory, install the required dependencies:
 ```bash
 npm install
 ```
-    the auth-service will run at http://localhost:4001/graphql
+
+the auth-service will run at http://localhost:4001/graphql
 
 3. In the `server` directory, run the following command to start the Authentication Microservice:
 ```bash
@@ -35,13 +36,14 @@ npx nodemon index.js
 > [!IMPORTANT]
 > Ensure MongoDB is running and create a database called `auth-service-db`
 
-4. Install and Start Authentication Microfrontend:
+4. Install and Start Authentication Microfrontend:  
     In the `client/auth-app` directory, install the required dependencies and start the app:
 ```bash
 npm install
 npm run dev
 ```
-    the auth-app will run at http://localhost:3001/
+
+the auth-app will run at http://localhost:3001/
 
 5. Install and Start the Shell App
    In the `client/shell-app` directory, install the required dependencies and start the app:
@@ -49,12 +51,13 @@ npm run dev
 npm install
 npm run dev
 ```
-    the shell-app will run at http://localhost:3000/
+
+the shell-app will run at http://localhost:3000/
 
 6. Coming Soon! Additional modules (Community, Business, Events)
 
-## Project Structure
-
+### 📁 Project Structure  
+```plaintext
 Group9COMP308Project/
 │── server/  (Backend services)
 │   ├── auth-service/  (Handles authentication)
@@ -72,3 +75,4 @@ Group9COMP308Project/
 │── .gitignore
 │── package.json
 │── README.md
+```
