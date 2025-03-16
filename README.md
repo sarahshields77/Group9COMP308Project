@@ -40,7 +40,7 @@ npx nodemon index.js
     In the `client/auth-app` directory, install the required dependencies and start the app:
 ```bash
 npm install
-npm run dev
+npm run deploy
 ```
 
 the auth-app will run at http://localhost:3001/
@@ -49,8 +49,7 @@ the auth-app will run at http://localhost:3001/
    In the `client/shell-app` directory, install the required dependencies and start the app:
 ```bash
 npm install
-npm run dev
-```
+npm run dev```
 
 the shell-app will run at http://localhost:3000/
 
