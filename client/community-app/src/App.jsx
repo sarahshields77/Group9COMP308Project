@@ -9,7 +9,7 @@ import BusinessPage from "./BusinessPage";
 
 // Apollo Client setup for GraphQL communication
 const client = new ApolloClient({
-  uri: "http://localhost:4003/graphql", // Placeholder for the future Community Service backend
+  uri: "http://localhost:4002/graphql", // Placeholder for the future Community Service backend
   cache: new InMemoryCache(),
   credentials: "include"
 });

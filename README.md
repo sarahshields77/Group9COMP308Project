@@ -61,11 +61,22 @@ npm install
 npm run deploy
 ```
   
-the community-app will run at http://localhost:3002/  
+the community-app will run at http://localhost:3002/    
 
+7. Install and Start the Community Service  
+   In the `server/community-service` directory, install the required dependencies and start the app:
+```bash
+npm install
+npm run dev
+```
 
-7. Coming Soon! Additional modules (Community, Business, Events)  
-8. Coming Soon! AI Integrations:  
+the community-service will run at http://localhost:4002/graphql  
+
+> [!IMPORTANT]
+> Ensure MongoDB is running and create a database called `community-service-db`
+
+8. Coming Soon! Additional modules (Community, Business, Events)  
+9. Coming Soon! AI Integrations:  
    AI Summarization: Auto-generate summaries for long discussions.  
    Sentiment Analysis: AI analyzes user posts and reviews.  
    Note - The Gemini API can be used for both summarization and sentiment analysis
