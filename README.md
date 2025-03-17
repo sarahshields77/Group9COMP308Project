@@ -21,62 +21,50 @@ git clone https://github.com/sarahshields77/Group9COMP308Project.git
 cd Group9COMP308Project
 ```
 
-2. Install dependencies for Backend.     
-   In the `server/auth-service` directory, install the required dependencies:
+2. Install dependencies and start Backend Services.     
+   In the `server/auth-service` and `server/community-service` directories, install the required dependencies:
 ```bash
 npm install
 ```
-
-the auth-service will run at http://localhost:4001/graphql
-
-3. In the `server` directory, run the following command to start the Authentication Microservice:
-```bash
-npx nodemon index.js
-```
 > [!IMPORTANT]
-> Ensure MongoDB is running and create a database called `auth-service-db`
+> Ensure MongoDB is running
+> Create these databases in MongoDB Compass or mongosh before starting: 
+>  `auth-service-db`
+>  `community-service-db`
 
-4. Install and Start Authentication Microfrontend:  
-    In the `client/auth-app` directory, install the required dependencies and start the app:
+   start the services:  
+   in server/auth-service and server/community-service run:  
+```bash
+npm run dev
+```
+
+the auth-service will run at http://localhost:4001/graphql  
+the community-service will run at http://localhost:4002/graphql  
+
+3. Install dependencies and Start the Microfrontends:  
+    In the `client/auth-app` directory, install the required dependencies and start the Authentication app:
 ```bash
 npm install
 npm run deploy
 ```
+the auth-app will run at http://localhost:3001/  
 
-the auth-app will run at http://localhost:3001/
-
-5. Install and Start the Shell App
-   In the `client/shell-app` directory, install the required dependencies and start the app:
+   In the `client/shell-app` directory, install the required dependencies and start the Shell app:
 ```bash
 npm install
 npm run dev
-```
-  
+```  
 the shell-app will run at http://localhost:3000/  
 
-6. Install and Start the Community App
    In the `client/community-app` directory, install the required dependencies and start the app:
 ```bash
 npm install
 npm run deploy
-```
-  
+```  
 the community-app will run at http://localhost:3002/    
 
-7. Install and Start the Community Service  
-   In the `server/community-service` directory, install the required dependencies and start the app:
-```bash
-npm install
-npm run dev
-```
-
-the community-service will run at http://localhost:4002/graphql  
-
-> [!IMPORTANT]
-> Ensure MongoDB is running and create a database called `community-service-db`
-
-8. Coming Soon! Additional modules (Community, Business, Events)  
-9. Coming Soon! AI Integrations:  
+1. Coming Soon! Additional modules  
+2. Coming Soon! AI Integrations:  
    AI Summarization: Auto-generate summaries for long discussions.  
    Sentiment Analysis: AI analyzes user posts and reviews.  
    Note - The Gemini API can be used for both summarization and sentiment analysis
