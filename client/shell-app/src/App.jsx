@@ -5,6 +5,7 @@ import "./App.css";
 
 // Lazy load `authApp` from the remote microfrontend
 const AuthApp = lazy(() => import("authApp/App"));
+const CommunityApp = lazy(() => import("communityApp/App"));
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/auth/*" element={<AuthApp />} />
+          <Route path="/community/*" element={<CommunityApp />} />
           <Route path="*" element={<h3 className="text-center">Welcome! Please explore our Community Services.</h3>} />
         </Routes>
       </Suspense>

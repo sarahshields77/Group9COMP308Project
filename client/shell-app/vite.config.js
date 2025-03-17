@@ -9,7 +9,8 @@ export default defineConfig({
     federation({
       name: "shellApp",
       remotes: {
-        authApp: "http://localhost:3001/assets/remoteEntry.js"
+        authApp: "http://localhost:3001/assets/remoteEntry.js",
+        communityApp: "http://localhost:3002/assets/remoteEntry.js"
       },
       shared: {
         react: { singleton: true, requiredVersion: "^19.0.0" },

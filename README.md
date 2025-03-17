@@ -49,12 +49,23 @@ the auth-app will run at http://localhost:3001/
    In the `client/shell-app` directory, install the required dependencies and start the app:
 ```bash
 npm install
-npm run dev```
+npm run dev
+```
+  
+the shell-app will run at http://localhost:3000/  
 
-the shell-app will run at http://localhost:3000/
+6. Install and Start the Community App
+   In the `client/community-app` directory, install the required dependencies and start the app:
+```bash
+npm install
+npm run deploy
+```
+  
+the community-app will run at http://localhost:3002/  
 
-6. Coming Soon! Additional modules (Community, Business, Events)  
-7. Coming Soon! AI Integrations:  
+
+7. Coming Soon! Additional modules (Community, Business, Events)  
+8. Coming Soon! AI Integrations:  
    AI Summarization: Auto-generate summaries for long discussions.  
    Sentiment Analysis: AI analyzes user posts and reviews.  
    Note - The Gemini API can be used for both summarization and sentiment analysis
