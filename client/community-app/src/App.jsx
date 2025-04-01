@@ -2,14 +2,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import CommunityHub from "./CommunityHub";
-import NewsPage from "./NewsPage";
+import CommunityHub from "./pages/CommunityHub";
+import NewsPage from "./pages/NewsPage";
 import EventsPage from "./EventsPage";
 import BusinessPage from "./BusinessPage";
 
-// Apollo Client setup for GraphQL communication
 const client = new ApolloClient({
-  uri: "http://localhost:4002/graphql", // Placeholder for the future Community Service backend
+  uri: "http://localhost:4002/graphql",
   cache: new InMemoryCache(),
   credentials: "include"
 });

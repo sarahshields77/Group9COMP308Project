@@ -1,4 +1,4 @@
-// client/community-app/src/CommunityHub.jsx
+// client/community-app/src/pages/CommunityHub.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
