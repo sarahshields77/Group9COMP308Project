@@ -62,12 +62,11 @@ npm install
 npm run deploy
 ```  
 the community-app will run at http://localhost:3002/    
-
-1. Coming Soon! Additional modules  
-2. Coming Soon! AI Integrations:  
+ 
+4. Coming Soon/TODO - AI Integrations:  
    AI Summarization: Auto-generate summaries for long discussions.  
    Sentiment Analysis: AI analyzes user posts and reviews.  
-   Note - The Gemini API can be used for both summarization and sentiment analysis
+   Note - The Gemini API can be used for both summarization and sentiment analysis  
 
 
 ### 📁 Project Structure  
@@ -76,14 +75,14 @@ Group9COMP308Project/
 │── server/  (Backend services)
 │   ├── auth-service/  (User Authentication Service - handles login, registration)
 │   ├── community-service/  (Community Engagement Service - news, discussions, help requests)
-│   ├── business-service/  (Business & Events Service - listings, events, deals)
-│   ├── personalization-service/  (AI Personalization Service - recommendations, trend detection)
+│   ├── business-service/  (Business & Events Service - listings, events, deals) [TODO]
+│   ├── personalization-service/  (AI Personalization Service - recommendations, trend detection) [TODO]
 │
 │── client/ (Frontend Micro Frontends)
 │   ├── shell-app/  (Main app that loads micro frontends)
 │   ├── auth-app/  (Authentication & User Management micro frontend)
 │   ├── community-app/  (Community & Business Engagement micro frontend)
-│   ├── events-app/  (Events & Administration micro frontend)
+│   ├── events-app/  (Events & Administration micro frontend) [TODO]
 │
 │── .gitignore
 │── package.json
