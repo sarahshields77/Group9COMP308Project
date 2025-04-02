@@ -1,8 +1,7 @@
 // server/community-service/resolvers/index.js
-
-const { get } = require("mongoose");
 const News = require("../models/News");
 const Discussion = require("../models/Discussion");
+const HelpRequest = require("../models/HelpRequest");
 
 module.exports = {
   Query: {
@@ -15,7 +14,8 @@ module.exports = {
         createdAt: item.createdAt.toISOString()
       }));
     },
-    getDiscussions: async () => await Discussion.find().sort({ createdAt: -1 })
+    getDiscussions: async () => await Discussion.find().sort({ createdAt: -1 }),
+    getHelpRequests: async () => await HelpRequest.find().sort({ createdAt: -1 })
   },
   Mutation: {
     addNews: async (_, { title, content }) => {
@@ -25,6 +25,10 @@ module.exports = {
     addDiscussion: async (_, { topic, message, author }) => {
       const discussion = new Discussion({ topic, message, author });
       return await discussion.save();
+    },
+    addHelpRequest: async (_, { title, description, category, postedBy }) => {
+      const newRequest = new HelpRequest({ title, description, category, postedBy });
+      return await newRequest.save();
     }
   }
 };

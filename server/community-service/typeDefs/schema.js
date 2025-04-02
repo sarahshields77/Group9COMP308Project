@@ -33,4 +33,21 @@ module.exports = gql`
   extend type Mutation {
     addDiscussion(topic: String!, message: String!, author: String): Discussion
   }
+
+  type HelpRequest {
+  id: ID!
+  title: String!
+  description: String!
+  category: String!
+  postedBy: String!
+  createdAt: String!
+}
+
+extend type Query {
+  getHelpRequests: [HelpRequest]
+}
+
+extend type Mutation {
+  addHelpRequest(title: String!, description: String!, category: String!, postedBy: String!): HelpRequest
+}
 `;

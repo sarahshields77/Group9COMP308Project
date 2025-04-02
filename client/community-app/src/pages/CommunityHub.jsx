@@ -3,7 +3,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import CommunityNav from "../components/Shared/CommunityNav";
 
-
 function CommunityHub() {
   const navigate = useNavigate(); 
 

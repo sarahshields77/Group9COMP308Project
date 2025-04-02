@@ -7,6 +7,9 @@ import NewsPage from "./pages/NewsPage";
 import EventsPage from "./EventsPage";
 import BusinessPage from "./BusinessPage";
 import DiscussionsPage from "./pages/DiscussionPage";
+import HelpRequestsPage from "./pages/HelpRequestsPage";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const client = new ApolloClient({
   uri: "http://localhost:4002/graphql",
@@ -24,6 +27,7 @@ function App() {
           <Route path="/events" element={<EventsPage />} />
           <Route path="/business" element={<BusinessPage />} />
           <Route path="/discussions" element={<DiscussionsPage />} />
+          <Route path="/help" element={<HelpRequestsPage />} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>

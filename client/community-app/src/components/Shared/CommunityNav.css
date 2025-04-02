@@ -32,4 +32,9 @@
     color: #0f5132;
     font-weight: bold;
   }
+
+  
+[data-theme="dark"] .nav-item {
+  color: var(--card-bg);
+}
   

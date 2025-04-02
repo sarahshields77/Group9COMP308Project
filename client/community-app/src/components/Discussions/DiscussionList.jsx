@@ -1,3 +1,4 @@
+// client/community-app/src/components/Discussions/DiscussionList.jsx
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
 

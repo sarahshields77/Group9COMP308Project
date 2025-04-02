@@ -1,3 +1,4 @@
+// client/community-app/src/components/Discussions/DiscussionForm.jsx
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { GET_DISCUSSIONS } from "./DiscussionList";

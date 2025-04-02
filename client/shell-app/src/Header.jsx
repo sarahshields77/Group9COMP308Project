@@ -1,10 +1,21 @@
-import React from 'react';
+// shell-app/src/Header.jsx
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Header() {
+  const [darkMode, setDarkMode] = useState(() => {
+    // Keep user preference in localStorage
+    return localStorage.getItem("darkMode") === "true";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", darkMode ? "dark" : "light");
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-4 mb-4 rounded">
+    <nav className="navbar navbar-expand-lg shadow-sm px-4 mb-4 rounded">
       <Link className="navbar-brand fw-bold" to="/">🏡 Community Connect</Link>
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav me-auto">
@@ -21,6 +32,12 @@ function Header() {
             <span className="nav-link disabled">Events</span>
           </li>
         </ul>
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="btn btn-outline-secondary btn-sm"
+        >
+          {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+        </button>
       </div>
     </nav>
   );

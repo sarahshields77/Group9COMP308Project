@@ -5,6 +5,8 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import "bootstrap/dist/css/bootstrap.min.css";
+import './index.css';
+import './App.css';
 
 // Set up Apollo Client for GraphQL communication
 const client = new ApolloClient({
