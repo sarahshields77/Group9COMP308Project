@@ -1,4 +1,4 @@
-// client/community-app/src/CommunityHub.jsx
+// client/community-app/src/pages/CommunityHub.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,8 +13,8 @@ function CommunityHub() {
         <button className="btn btn-info" onClick={() => navigate("/news")}>
           View Local News
         </button>
-        <button className="btn btn-warning" onClick={() => navigate("/events")}>
-          Find Local Events
+        <button className="btn btn-warning" onClick={() => navigate("/discussions")}>
+          Join a Discussion
         </button>
         <button className="btn btn-success" onClick={() => navigate("/business")}>
           Support Local Businesses
