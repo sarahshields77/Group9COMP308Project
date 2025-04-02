@@ -18,7 +18,14 @@ export const GET_HELP_REQUESTS = gql`
 export default function HelpRequestList() {
   const { data, loading, error } = useQuery(GET_HELP_REQUESTS);
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading help requests.</p>;
+  if (error) {
+    console.error("Error in HelpRequestList:", error.message);
+    return <p>Sorry! Something went wrong while loading help requests.</p>;
+  }
+  
+  if (data.getHelpRequests.length === 0) {
+    return <p>No help requests yet. Feel free to ask for help!</p>;
+  }
 
   return (
     <div>

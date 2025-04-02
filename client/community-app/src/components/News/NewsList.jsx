@@ -19,10 +19,14 @@ export default function NewsList() {
 
   if (loading) return <p>Loading...</p>;
   if (error) {
-    console.error("❌ Apollo Error in NewsList:", error);
-    return <p>Error loading news.</p>;
+    console.error("Error in NewsList:", error.message);
+    return <p>Sorry! Something went wrong while loading news.</p>;
   }
-  console.log("📅 News data:", data.getNews);
+  
+  if (data.getNews.length === 0) {
+    return <p>No news yet. Start reporting!</p>;
+  }
+
   return (
     <div className="mt-4">
       {data.getNews.map((item) => (

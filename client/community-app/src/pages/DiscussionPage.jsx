@@ -1,3 +1,4 @@
+// client/community-app/src/pages/DiscussionPage.jsx
 import React from "react";
 import DiscussionForm from "../components/Discussions/DiscussionForm";
 import DiscussionList from "../components/Discussions/DiscussionList";

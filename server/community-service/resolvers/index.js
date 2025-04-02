@@ -2,6 +2,7 @@
 const News = require("../models/News");
 const Discussion = require("../models/Discussion");
 const HelpRequest = require("../models/HelpRequest");
+const Reply = require("../models/Reply");
 
 module.exports = {
   Query: {
@@ -15,7 +16,10 @@ module.exports = {
       }));
     },
     getDiscussions: async () => await Discussion.find().sort({ createdAt: -1 }),
-    getHelpRequests: async () => await HelpRequest.find().sort({ createdAt: -1 })
+    getHelpRequests: async () => await HelpRequest.find().sort({ createdAt: -1 }),
+    getReplies: async (_, { discussionId }) => {
+      return await Reply.find({ discussionId }).sort({ createdAt: 1 });
+    }
   },
   Mutation: {
     addNews: async (_, { title, content }) => {
@@ -29,6 +33,10 @@ module.exports = {
     addHelpRequest: async (_, { title, description, category, postedBy }) => {
       const newRequest = new HelpRequest({ title, description, category, postedBy });
       return await newRequest.save();
+    },
+    addReply: async (_, { discussionId, author, message }) => {
+      const reply = new Reply({ discussionId, author, message });
+      return await reply.save();
     }
   }
 };

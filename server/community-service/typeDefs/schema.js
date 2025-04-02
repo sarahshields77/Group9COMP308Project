@@ -41,13 +41,29 @@ module.exports = gql`
   category: String!
   postedBy: String!
   createdAt: String!
-}
+  }
 
-extend type Query {
-  getHelpRequests: [HelpRequest]
-}
+  extend type Query {
+    getHelpRequests: [HelpRequest]
+  }
 
-extend type Mutation {
-  addHelpRequest(title: String!, description: String!, category: String!, postedBy: String!): HelpRequest
-}
+  extend type Mutation {
+    addHelpRequest(title: String!, description: String!, category: String!, postedBy: String!): HelpRequest
+  }
+  type Reply {
+  id: ID!
+  discussionId: ID!
+  author: String!
+  message: String!
+  createdAt: String!
+  }
+
+  extend type Query {
+    getReplies(discussionId: ID!): [Reply]
+  }
+
+  extend type Mutation {
+    addReply(discussionId: ID!, author: String!, message: String!): Reply
+  }
+
 `;
