@@ -16,6 +16,7 @@ module.exports = {
       }));
     },
     getDiscussions: async () => await Discussion.find().sort({ createdAt: -1 })
+    }
   },
   Mutation: {
     addNews: async (_, { title, content }) => {
