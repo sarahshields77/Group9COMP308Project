@@ -22,7 +22,7 @@ export default function ReplyList({ discussionId }) {
     console.error("Error in ReplyList:", error.message);
     return <p>Sorry! Something went wrong while loading replies.</p>;
   }
-  
+
   if (data.getReplies.length === 0) {
     return <p>No replies yet. Continue the conversation!</p>;
   }
@@ -32,7 +32,7 @@ export default function ReplyList({ discussionId }) {
       {data.getReplies.map((reply) => (
         <div key={reply.id} className="card mb-1 p-2">
           <p className="mb-1">{reply.message}</p>
-          <small className="text-muted">By {reply.author} on {new Date(reply.createdAt).toLocaleString()}</small>
+          <small className="text-muted">By {reply.author} on {new Date(Number(reply.createdAt)).toLocaleString()}</small>
         </div>
       ))}
     </div>
