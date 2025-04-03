@@ -66,4 +66,15 @@ module.exports = gql`
     addReply(discussionId: ID!, author: String!, message: String!): Reply
   }
 
+  type Volunteer {
+  id: ID!
+  name: String!
+  type: String!
+  contact: String!
+  }
+
+  extend type Query {
+    getVolunteers: [Volunteer]
+  }
+
 `;

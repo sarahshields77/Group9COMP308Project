@@ -3,6 +3,7 @@ const News = require("../models/News");
 const Discussion = require("../models/Discussion");
 const HelpRequest = require("../models/HelpRequest");
 const Reply = require("../models/Reply");
+const Volunteer = require("../models/Volunteer");
 
 module.exports = {
   Query: {
@@ -19,7 +20,8 @@ module.exports = {
     getHelpRequests: async () => await HelpRequest.find().sort({ createdAt: -1 }),
     getReplies: async (_, { discussionId }) => {
       return await Reply.find({ discussionId }).sort({ createdAt: 1 });
-    }
+    },
+    getVolunteers: async () => await Volunteer.find()
   },
   Mutation: {
     addNews: async (_, { title, content }) => {
