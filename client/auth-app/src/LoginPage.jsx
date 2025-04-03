@@ -34,6 +34,13 @@ function LoginPage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (loggedInUser) {
+      const event = new CustomEvent('redirect', { detail: { path: '/community' } });
+      window.dispatchEvent(event);
+    }
+  }, [loggedInUser])
+
   const handleRegister = async () => {
     await register({ variables: { username, password, role } });
     alert("Registered! Now log in.");
@@ -49,10 +56,6 @@ function LoginPage() {
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     setLoggedInUser(null);
   };
-
-  if (loggedInUser) {
-    return <Navigate to="/community" />;
-  }
 
   return (
     <div className="container mt-5">
