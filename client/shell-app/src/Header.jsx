@@ -39,9 +39,6 @@ function Header() {
             <Link className="nav-link" to="/community">Community</Link>
           </li>
           <li className="nav-item">
-            <span className="nav-link disabled">Business</span>
-          </li>
-          <li className="nav-item">
             <span className="nav-link disabled">Events</span>
           </li>
           <li className="nav-item">
