@@ -6,9 +6,7 @@ export default function useUserRole() {
   const [role, setRole] = useState(null);
 
   useEffect(() => {
-    console.log("🍪 Cookie string:", document.cookie);
-
-    const token = document.cookie
+      const token = document.cookie
       .split("; ")
       .find((row) => row.startsWith("token="));
 
