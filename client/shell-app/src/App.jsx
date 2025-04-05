@@ -5,6 +5,7 @@ import "./App.css";
 import "./index.css";
 import Header from "./Header";
 import Footer from "./Footer";
+import useUserRole from "./hooks/useUserRole.jsx";
 
 const AuthApp = lazy(() => import("authApp/App"));
 const CommunityApp = lazy(() => import("communityApp/App"));
@@ -13,6 +14,13 @@ import { useEffect } from "react";
 
 function App() {
   const navigate = useNavigate();
+  const role = useUserRole(); // Custom hook to get logged-in user role
+
+  useEffect(() => {
+    if (role) {
+      console.log(`🔐 Logged in as: ${role}`);
+    }
+  }, [role]);
 
   useEffect(() => {
     const handleRedirect = (event) => {

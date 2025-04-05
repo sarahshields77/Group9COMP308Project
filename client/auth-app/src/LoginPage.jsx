@@ -1,3 +1,4 @@
+// client/auth-app/src/LoginPage.jsx
 import React, { useState, useEffect } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { Navigate } from "react-router-dom";

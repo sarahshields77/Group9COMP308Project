@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { RoleProvider } from "./contexts/RoleContext.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './index.css';
 import './App.css';
@@ -18,9 +19,11 @@ const client = new ApolloClient({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <RoleProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </RoleProvider>
     </ApolloProvider>
   </React.StrictMode>
 );

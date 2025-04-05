@@ -1,9 +1,11 @@
 // shell-app/src/Header.jsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useUserRole from './hooks/useUserRole';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Header() {
+  const role = useUserRole(); // Custom hook to get logged-in user role
   const [darkMode, setDarkMode] = useState(() => {
     // Keep user preference in localStorage
     return localStorage.getItem("darkMode") === "true";

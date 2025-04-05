@@ -72,7 +72,12 @@ const resolvers = {
       if (!valid) throw new Error("Invalid password");
 
       const token = jwt.sign({ id: user.id, username: user.username, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1d" });
-      res.cookie("token", token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+      res.cookie("token", token, {
+        httpOnly: false, // Set to true in production
+        maxAge: 24 * 60 * 60 * 1000,
+        secure: false,         // ⚠️ Set to true in production
+        sameSite: "Lax",       // use "None" + "Secure" if cross-origin - Lax ok for same-origin
+      });
       return token;
     }
   }
