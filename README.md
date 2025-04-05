@@ -22,7 +22,7 @@ cd Group9COMP308Project
 ```
 
 2. Install dependencies and start Backend Services.     
-   In the `server/auth-service` and `server/community-service` directories, install the required dependencies:
+   In the `server/auth-service` , `server/community-service`, and `server/business-service` directories, install the required dependencies:
 ```bash
 npm install
 ```
@@ -31,17 +31,19 @@ npm install
 > Create these databases in MongoDB Compass or mongosh before starting: 
 >  `auth-service-db`
 >  `community-service-db`
+>  `business-service-db`
 
    start the services:  
-   in server/auth-service and server/community-service run:  
+   in server/auth-service, server/community-service, and server/business-service run:  
 ```bash
 npm run dev
 ```
 
 the auth-service will run at http://localhost:4001/graphql  
-the community-service will run at http://localhost:4002/graphql  
+the community-service will run at http://localhost:4002/graphql
+the business-service will run at http://localhost:4003/graphql  
 
-3. Install dependencies and Start the Microfrontends:  
+1. Install dependencies and Start the Microfrontends:  
     In the `client/auth-app` directory, install the required dependencies and start the Authentication app:
 ```bash
 npm install
@@ -63,7 +65,7 @@ npm run deploy
 ```  
 the community-app will run at http://localhost:3002/    
  
-4. Coming Soon/TODO - AI Integrations:  
+1. Coming Soon/TODO - AI Integrations:  
    AI Summarization: Auto-generate summaries for long discussions.  
    Sentiment Analysis: AI analyzes user posts and reviews.  
    Note - The Gemini API can be used for both summarization and sentiment analysis  

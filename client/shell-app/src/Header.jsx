@@ -53,7 +53,7 @@ function Header() {
                 window.location.href = "/auth";
               }}
             >
-              🚪 Logout
+              Logout
             </span>
           </li>
         </ul>
