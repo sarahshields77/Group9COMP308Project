@@ -2,6 +2,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { communityClient } from "./apolloClients";
 import CommunityHub from "./pages/CommunityHub";
 import NewsPage from "./pages/NewsPage";
 import EventsPage from "./pages/EventsPage";
@@ -19,7 +20,7 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={communityClient}>
       <BrowserRouter basename="/community">  
         <Routes>
           <Route path="/" element={<CommunityHub />} />
