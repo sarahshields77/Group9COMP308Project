@@ -17,9 +17,7 @@ const GET_BUSINESSES = gql`
 
 export default function BusinessList() {
   const client = useApolloClient();
-  console.log("🔍 Using Apollo Client URI:", client.link.options.uri);
   const { data, loading, error } = useQuery(GET_BUSINESSES);
-  console.log("🚀 BusinessList rendered");
 
   if (loading) return <p>Loading businesses...</p>;
   if (error) return <p>Error loading businesses.</p>;

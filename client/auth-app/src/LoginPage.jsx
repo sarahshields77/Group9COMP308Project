@@ -44,7 +44,7 @@ function LoginPage() {
 
   const handleRegister = async () => {
     await register({ variables: { username, password, role } });
-    alert("Registered! Now log in.");
+    alert("Registered! Now you can log in.");
   };
 
   const handleLogin = async () => {
