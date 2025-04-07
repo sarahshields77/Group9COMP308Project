@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 const Business = require("./models/Business");
 const Deal = require("./models/Deal");
 const Event = require("./models/Event");
+const Review = require("./models/Review");
 
 
 const typeDefs = require("./typeDefs/schema");
@@ -54,6 +55,50 @@ mongoose
         imageUrl: "https://img.freepik.com/free-vector/tech-computer-logo-template_23-2149204146.jpg?semt=ais_hybrid&w=740"
       }
     ], "businesses");
+
+    // Fetch freshly seeded businesses by name
+    const greenLeaf = await Business.findOne({ name: "Green Leaf Café" });
+    const quickFix = await Business.findOne({ name: "QuickFix Electronics" });
+
+    // Seed sample reviews
+    await seedIfEmpty(Review, [
+      // Reviews for Green Leaf Café
+      {
+        businessId: greenLeaf?._id,
+        author: "Samantha L.",
+        text: "The matcha latte is my favorite. Super friendly staff too!",
+        rating: 5,
+        reply: "Thanks so much, Samantha! See you again soon!",
+        createdAt: new Date()
+      },
+      {
+        businessId: greenLeaf?._id,
+        author: "Jordan M.",
+        text: "Appreciate the healthy options, but the service was a bit slow.",
+        rating: 3,
+        reply: "Thanks for your patience, Jordan. We’re working on improving speed!",
+        createdAt: new Date()
+      },
+
+      // Reviews for QuickFix Electronics
+      {
+        businessId: quickFix?._id,
+        author: "Devon R.",
+        text: "Repaired my cracked screen in under an hour. Lifesaver!",
+        rating: 5,
+        reply: "Happy to help, Devon! Glad you're back up and running.",
+        createdAt: new Date()
+      },
+      {
+        businessId: quickFix?._id,
+        author: "Alex T.",
+        text: "Great prices but had to wait a few extra days for a part.",
+        rating: 4,
+        reply: "Thanks for your patience, Alex — hope everything's working great now!",
+        createdAt: new Date()
+      }
+    ], "reviews");
+    
 
     // Find one business to link deals to
     const sampleBusiness = await Business.findOne();
