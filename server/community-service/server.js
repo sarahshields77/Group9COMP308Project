@@ -21,10 +21,9 @@ const HelpRequest = require("./models/HelpRequest");
 const Volunteer = require("./models/Volunteer");
 
 // Connect to MongoDB
-mongoose
-  .connect("mongodb://localhost:27017/community-service-db", {
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(async () => {
     console.log("✅ Connected to MongoDB");

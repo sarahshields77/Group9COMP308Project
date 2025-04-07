@@ -22,10 +22,9 @@ app.use(cors({
 app.use(cookieParser());
 
 // Connect to MongoDB
-mongoose
-  .connect("mongodb://localhost:27017/business-service-db", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
   })
   .then(async () => {
     console.log("✅ Connected to MongoDB");

@@ -27,11 +27,12 @@ cd Group9COMP308Project
 npm install
 ```
 > [!IMPORTANT]
-> Ensure MongoDB is running
-> Create these databases in MongoDB Compass or mongosh before starting: 
->  `auth-service-db`
->  `community-service-db`
->  `business-service-db`
+> ## 🌐 MongoDB Atlas Setup (Updated April 2025)
+>
+>All microservices now use MongoDB Atlas instead of local MongoDB.
+
+### 🚀 What you need to do:
+1. **Add your `.env` file** to each microservice root (env-files discord channel)
 
    start the services:  
    in server/auth-service, server/community-service, and server/business-service run:  
