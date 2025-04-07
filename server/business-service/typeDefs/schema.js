@@ -8,6 +8,7 @@ module.exports = gql`
     description: String
     location: String
     ownerId: String!
+    imageUrl: String
     createdAt: String
   }
 
@@ -30,15 +31,28 @@ module.exports = gql`
     createdAt: String
   }
 
+  type Review {
+    id: ID!
+    businessId: ID!
+    author: String!
+    text: String!
+    rating: Int!
+    reply: String
+    createdAt: String
+  }
+
   type Query {
     getBusinesses: [Business]
     getDeals: [Deal]
     getEvents: [Event]
+    getReviews(businessId: ID!): [Review]  # <-- filtered by business
   }
 
   type Mutation {
-    addBusiness(name: String!, description: String, location: String, ownerId: String!): Business
+    addBusiness(name: String!, description: String, location: String, ownerId: String!, imageUrl: String): Business
     addDeal(title: String!, description: String, businessId: ID!, validUntil: String): Deal
     addEvent(title: String!, description: String, location: String, date: String, organizerId: String!): Event
+    addReview(businessId: ID!, author: String!, text: String!, rating: Int!): Review
+    replyToReview(reviewId: ID!, reply: String!): Review
   }
 `;

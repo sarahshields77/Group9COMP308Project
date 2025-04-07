@@ -43,13 +43,15 @@ mongoose
         name: "Green Leaf Café",
         description: "A cozy local café with fresh and healthy options.",
         location: "Main Street",
-        ownerId: "test-business-owner-1"
+        ownerId: "test-business-owner-1",
+        imageUrl: "https://greenleafcafe.uwo.ca/files/Green_Leaf_1.png"
       },
       {
         name: "QuickFix Electronics",
         description: "Affordable repair services for phones and laptops.",
         location: "Tech Plaza",
-        ownerId: "test-business-owner-2"
+        ownerId: "test-business-owner-2",
+        imageUrl: "https://img.freepik.com/free-vector/tech-computer-logo-template_23-2149204146.jpg?semt=ais_hybrid&w=740"
       }
     ], "businesses");
 

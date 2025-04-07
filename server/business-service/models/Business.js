@@ -6,6 +6,7 @@ const businessSchema = new mongoose.Schema({
   description: String,
   location: String,
   ownerId: { type: String, required: true }, // user ID of the Business Owner
+  imageUrl: String, // path or URL to the business image
   createdAt: { type: Date, default: Date.now }
 });
 
