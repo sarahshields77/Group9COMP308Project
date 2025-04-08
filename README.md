@@ -34,8 +34,8 @@ npm install
 ### 🚀 What you need to do:
 1. **Add your `.env` file** to each microservice root (env-files discord channel)
 
-   start the services:  
-   in server/auth-service, server/community-service, and server/business-service run:  
+   Install dependencies and start the services:  
+   in server/auth-service, server/community-service, server/business-service, and server/personalization-service run:  
 ```bash
 npm run dev
 ```
@@ -43,6 +43,7 @@ npm run dev
 the auth-service will run at http://localhost:4001/graphql  
 the community-service will run at http://localhost:4002/graphql
 the business-service will run at http://localhost:4003/graphql  
+the personalization-service will run at http://localhost:4004/graphql
 
 1. Install dependencies and Start the Microfrontends:  
     In the `client/auth-app` directory, install the required dependencies and start the Authentication app:
