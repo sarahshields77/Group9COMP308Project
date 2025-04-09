@@ -1,6 +1,7 @@
 // client/shell-app/src/hooks/useUserRole.jsx
+
 import { useEffect, useState } from "react";
-import  { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 export default function useUserRole() {
   const [role, setRole] = useState(null);

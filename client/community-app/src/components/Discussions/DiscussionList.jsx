@@ -1,6 +1,7 @@
 // client/community-app/src/components/Discussions/DiscussionList.jsx
-import React, { useState } from "react";
-import { useQuery, gql } from "@apollo/client";
+import React, { useState, useEffect } from "react";
+import { useQuery, gql, useMutation } from "@apollo/client";
+import { personalizationClient } from "../../apolloClients";
 import ReplyForm from "./ReplyForm";
 import ReplyList from "./ReplyList";
 
@@ -16,13 +17,41 @@ const GET_DISCUSSIONS = gql`
   }
 `;
 
+const GENERATE_SUMMARY = gql`
+  mutation GenerateSummary($prompt: String!, $size: Int!) {
+    generateSummary(prompt: $prompt, size: $size)
+  }
+`;
+
 export default function DiscussionList() {
   const { data, loading, error } = useQuery(GET_DISCUSSIONS);
   const [activeReplyForm, setActiveReplyForm] = useState(null);
+  const [summaries, setSummaries] = useState({});
+  const [generateSummary] = useMutation(GENERATE_SUMMARY, {
+    client: personalizationClient,
+  });
 
-  const toggleReplyForm = (id) => {
-    setActiveReplyForm(prevId => (prevId === id ? null : id));
-  };
+  // Automatically generate and embed summaries for discussions when they are fetched
+  useEffect(() => {
+    if (data && data.getDiscussions) {
+      data.getDiscussions.forEach(async (discussion) => {
+        if (!summaries[discussion.id]) {
+          try {
+            const { data: summaryData } = await generateSummary({
+              variables: { prompt: discussion.message, size: 150 },
+            });
+            setSummaries((prev) => ({
+              ...prev,
+              [discussion.id]: summaryData.generateSummary,
+            }));
+          } catch (err) {
+            console.error(`Error generating summary for discussion ${discussion.id}:`, err);
+          }
+        }
+      });
+    }
+  }, [data, generateSummary, summaries]);
+  /////////////////
 
   if (loading) return <p>Loading discussions...</p>;
   if (error) {
@@ -44,6 +73,15 @@ export default function DiscussionList() {
             <p className="card-footer text-muted" style={{ fontSize: "0.8em" }}>
               Posted by: {item.author || "Anonymous"} on {new Date(Number(item.createdAt)).toLocaleString()}
             </p>
+
+            {/* Summary Section - Embedded Version */}
+            {summaries[item.id] ? (
+              <div className="alert alert-info">
+                <strong>Summary:</strong> {summaries[item.id]}
+              </div>
+            ) : (
+              <div className="alert alert-warning">Generating summary...</div>
+            )}
 
             {/* Replies */}
             <div className="mt-3">
@@ -67,4 +105,3 @@ export default function DiscussionList() {
     </div>
   );
 }
-

@@ -12,3 +12,9 @@ export const businessClient = new ApolloClient({
   cache: new InMemoryCache(),
   credentials: "include",
 });
+
+export const personalizationClient = new ApolloClient({
+  uri: "http://localhost:4004/graphql", // Personalization service
+  cache: new InMemoryCache(),
+  credentials: "include",
+});

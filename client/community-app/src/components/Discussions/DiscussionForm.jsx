@@ -1,7 +1,7 @@
 // client/community-app/src/components/Discussions/DiscussionForm.jsx
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
-import { GET_DISCUSSIONS } from "./DiscussionList";
+//import { GET_DISCUSSIONS } from "./DiscussionList";
 
 const ADD_DISCUSSION = gql`
   mutation AddDiscussion($topic: String!, $message: String!, $author: String) {
