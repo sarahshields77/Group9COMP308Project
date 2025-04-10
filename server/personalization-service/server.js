@@ -30,7 +30,7 @@ const typeDefs = gql`
   type Mutation {
     generateSummary(prompt: String!, size: Int!): String
     analyzeSentiment(prompt: String!, size: Int!): String
-    matchVolunteers(requestedBy: String!, volunteers: String!): String
+    matchVolunteers(requestedBy: String!, volunteers: String!, size: Int!): String
 }
 `;
 
@@ -83,7 +83,7 @@ const resolvers = {
       }
     },
 
-    matchVolunteers: async (_, { requestedBy, volunteers }) => {
+    matchVolunteers: async (_, { requestedBy, volunteers, size }) => {
       try {
         // Validate input
         if (!requestedBy || typeof requestedBy !== 'string' || requestedBy.trim() === '') {
@@ -92,11 +92,14 @@ const resolvers = {
         if (!volunteers || typeof volunteers !== 'string' || volunteers.trim() === '') {
           throw new Error("Invalid volunteers. Please provide a valid string describing the volunteers and their skills.");
         }
+        if (!size || typeof size !== 'number' || size <= 0) {
+          throw new Error("Invalid size. Please provide a positive integer.");
+        }
     
         // Match volunteers
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const instructions = "Please match a volunteer with the requester based on their needs and skills: ";
-        const prompt = instructions + "\nRequested By: " + requestedBy + "\nVolunteers: " + volunteers;
+        const instructions = "In ${size} characters, please match a volunteer with the requester based on their needs and skills: ";
+        const prompt = instructions + "\nRequested By: " + requestedBy + "\nVolunteers: " + volunteers + ". Where there is no exact match, suggest the best possible match. Don't forget to provide the volunteer's contact information in the format Contact: <contact info>";
         const result = await model.generateContent(prompt);
         const response = await result.response;
         return response.text();
@@ -125,7 +128,8 @@ mutation {
 mutation {
   matchVolunteers(
     requestedBy: "A community center needs volunteers to teach coding to children.",
-    volunteers: "John Doe: Experienced in teaching Python. Jane Smith: Skilled in JavaScript and web development. Alex Johnson: Beginner in programming but eager to help."
+    volunteers: "John Doe: Experienced in teaching Python. Jane Smith: Skilled in JavaScript and web development. Alex Johnson: Beginner in programming but eager to help.",
+    size: 200
   )
 }
 

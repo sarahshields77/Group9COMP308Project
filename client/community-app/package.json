@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.13.4",
+    "@google/genai": "^0.7.0",
     "@originjs/vite-plugin-federation": "^1.4.0",
     "bootstrap": "^5.3.3",
     "graphql": "^16.10.0",

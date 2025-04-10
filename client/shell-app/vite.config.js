@@ -16,8 +16,6 @@ export default defineConfig({
         react: { singleton: true, requiredVersion: "^19.0.0" },
         "react-dom": { singleton: true, requiredVersion: "^19.0.0" },
         "@apollo/client": { singleton: true, requiredVersion: "^3.9.5" },
-        //graphql: { singleton: true, requiredVersion: "^15.5.0" },
-        //"react-router-dom": { singleton: true, requiredVersion: "^6.0.0" }
       }
     })
   ],
