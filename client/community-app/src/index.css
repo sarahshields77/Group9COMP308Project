@@ -52,3 +52,6 @@ html, body {
   color: var(--text-color);
 }
 
+hr {
+  margin: 3rem 1rem 2rem 1rem;
+}

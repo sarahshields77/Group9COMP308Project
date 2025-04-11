@@ -1,7 +1,8 @@
 // client/community-app/src/components/Businesses/BusinessList.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { businessClient } from "../../apolloClients";
+import { personalizationClient } from "../../apolloClients";
 import useUser from "../../hooks/useUser";
 import ReviewForm from "./ReviewForm";
 
@@ -41,11 +42,21 @@ const REPLY_TO_REVIEW = gql`
   }
 `;
 
+const GENERATE_SENTIMENT_ANALYSIS = gql`
+  mutation AnalyzeSentiment($prompt: String!, $size: Int!) {
+    analyzeSentiment(prompt: $prompt, size: $size)
+  }
+`;
 
 function ReviewsList({ businessId, currentUser, ownerId }) {
   const user = useUser();
   const [replyingTo, setReplyingTo] = useState(null);
   const [replyText, setReplyText] = useState("");
+  const [sentiment, setSentiment] = useState(null);
+
+  const [analyzeSentiment] = useMutation(GENERATE_SENTIMENT_ANALYSIS, {
+    client: personalizationClient,
+  });
 
   const { data, loading, error, refetch } = useQuery(GET_REVIEWS, {
     variables: { businessId },
@@ -60,61 +71,93 @@ function ReviewsList({ businessId, currentUser, ownerId }) {
       refetch();
     }
   });
+    
+  // Sentiment analysis for all reviews as a whole
+  useEffect(() => {
+    if (data && data.getReviews && data.getReviews.length > 0) {
+      const allReviewsText = data.getReviews.map((review) => review.text).join(" ");
+      (async () => {
+        try {
+          const { data: sentimentData } = await analyzeSentiment({
+            variables: { prompt: allReviewsText, size: 300 },
+          });
+          setSentiment(sentimentData.analyzeSentiment);
+        } catch (err) {
+          console.error(`Error generating sentiment analysis for business ${businessId}:`, err);
+        }
+      })();
+    }
+  }, [data, analyzeSentiment]);
 
   if (loading) return <p>Loading reviews...</p>;
   if (error) return <p>Error loading reviews.</p>;
 
   return (
     <div className="mt-3">
-      <h6>⭐ Customer Reviews:</h6>
+      <hr /><h4>⭐ Customer Reviews ⭐</h4>
+      
+      {/* Sentiment Analysis */}
+      {sentiment ? (
+        <div className="alert alert-info">
+          <strong>Sentiment Analysis:</strong><br />{sentiment}
+        </div>
+      ) : (
+        <div className="alert alert-warning">Generating sentiment analysis...</div>
+      )}
+
+      
       {data.getReviews.length === 0 ? (
         <p>No reviews yet.</p>
       ) : (
-        data.getReviews.map((review) => (
-          <div key={review.id} className="border p-2 rounded mb-2">
-            <p><strong>{review.author}</strong> rated it {review.rating}/5</p>
-            <p>{review.text}</p>
-            {review.reply ? (
-              <p className="text-muted"><strong>Owner Reply:</strong> {review.reply}</p>
-            ) : (
-              currentUser?.id === ownerId && (
-                <div>
-                  {replyingTo === review.id ? (
-                    <>
-                      <textarea
-                        className="form-control mb-2"
-                        value={replyText}
-                        onChange={(e) => setReplyText(e.target.value)}
-                        placeholder="Write a reply..."
-                      />
-                      <button
-                        className="btn btn-sm btn-success me-2"
-                        onClick={() =>
-                          replyToReview({ variables: { reviewId: review.id, reply: replyText } })
-                        }
-                      >
-                        Submit Reply
-                      </button>
-                      <button
-                        className="btn btn-sm btn-secondary"
-                        onClick={() => setReplyingTo(null)}
-                      >
-                        Cancel
-                      </button>
-                    </>
-                  ) : (
+        <>
+        {data.getReviews.map((review) => (            
+
+        <div key={review.id} className="border p-2 rounded mb-2">
+          <p><strong>{review.author}</strong> rated it {review.rating}/5</p>
+          <p>{review.text}</p>
+          {review.reply ? (
+            <p className="text-muted"><strong>Owner Reply:</strong> {review.reply}</p>
+          ) : (
+            currentUser?.id === ownerId && (
+              <div>
+                {replyingTo === review.id ? (
+                  <>
+                    <textarea
+                      className="form-control mb-2"
+                      value={replyText}
+                      onChange={(e) => setReplyText(e.target.value)}
+                      placeholder="Write a reply..."
+                    />
                     <button
-                      className="btn btn-outline-secondary btn-sm"
-                      onClick={() => setReplyingTo(review.id)}
+                      className="btn btn-sm btn-success me-2"
+                      onClick={() =>
+                        replyToReview({ variables: { reviewId: review.id, reply: replyText } })
+                      }
                     >
-                      Reply
+                      Submit Reply
                     </button>
-                  )}
-                </div>
-              )
-            )}
-          </div>
-        ))
+                    <button
+                      className="btn btn-sm btn-secondary"
+                      onClick={() => setReplyingTo(null)}
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    className="btn btn-outline-secondary btn-sm"
+                    onClick={() => setReplyingTo(review.id)}
+                  >
+                    Reply
+                  </button>
+                )}
+              </div>
+            )
+          )}
+
+        </div>  
+        ))}
+        </>
       )}
     </div>
   );
@@ -131,7 +174,7 @@ export default function BusinessList() {
   return (
     <div>
       {data.getBusinesses.map((biz) => (
-        <div key={biz.id} className="card my-3">
+        <div key={biz.id} className="card my-3">          
           <div className="card-body">
             {biz.imageUrl && (
               <img

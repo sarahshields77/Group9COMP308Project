@@ -12,9 +12,14 @@ const GET_REPLIES = gql`
   }
 `;
 
-export default function ReplyList({ discussionId }) {
+export default function ReplyList({ discussionId, setReplies }) {
   const { data, loading, error } = useQuery(GET_REPLIES, {
-    variables: { discussionId }
+    variables: { discussionId },
+    onCompleted: (data) => {
+      if (setReplies) {
+        setReplies(data.getReplies); // Pass replies to parent
+      }
+    },
   });
 
   if (loading) return <p>Loading replies...</p>;

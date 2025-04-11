@@ -73,7 +73,7 @@ const resolvers = {
 
         // Perform sentiment analysis
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const instructions = `In ${size} characters, perform a sentiment analysis on the following: `;
+        const instructions = `In ${size} characters, perform a sentiment analysis with explanation on the following: `;
         const result = await model.generateContent(instructions + prompt);
         const response = await result.response;
         return response.text();
@@ -111,7 +111,20 @@ const resolvers = {
   },
 };
 
-/* Manual Tests for the GraphQL API Playground 
+const server = new ApolloServer({ typeDefs, resolvers });
+
+server.start().then(() => {
+  server.applyMiddleware({ app, cors: false });
+
+  // Start the server
+  app.listen({ port: 4004 }, () => {
+    console.log("🚀 Personalization Service running at:");
+    console.log("GraphQL API: http://localhost:4004/graphql");
+  });
+});
+
+
+/* Tests for the GraphQL API Playground 
 
 mutation {
   generateSummary(prompt: "Summarize the latest advancements in AI technology.", size: 100)
@@ -135,14 +148,3 @@ mutation {
 
 */
 
-const server = new ApolloServer({ typeDefs, resolvers });
-
-server.start().then(() => {
-  server.applyMiddleware({ app, cors: false });
-
-  // Start the server
-  app.listen({ port: 4004 }, () => {
-    console.log("🚀 Personalization Service running at:");
-    console.log("GraphQL API: http://localhost:4004/graphql");
-  });
-});
