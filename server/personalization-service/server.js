@@ -31,6 +31,7 @@ const typeDefs = gql`
     generateSummary(prompt: String!, size: Int!): String
     analyzeSentiment(prompt: String!, size: Int!): String
     matchVolunteers(requestedBy: String!, volunteers: String!, size: Int!): String
+    engagementAnalysis(prompt: String!, size: Int!): String
 }
 `;
 
@@ -73,8 +74,7 @@ const resolvers = {
 
         // Perform sentiment analysis
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        //const instructions = `In ${size} characters, perform a sentiment analysis with explanation on the following: `;
-        const instructions = `In ${size} characters, analyze the following reviews for sentiment, but pay special attention to exaggerated complaints, sarcasm, or over-the-top expectations. Look for inconsistencies, contradictions, and absurd demands that indicate the reviewer is being unreasonable or overly dramatic. The sentiment may still be negative, but the tone could be comically disproportionate to the situation. Consider the language used, such as hyperbole, or any signs that the reviewer has unrealistic expectations of the service or product. Reviews: `
+        const instructions = `In ${size} characters, analyze the following reviews for sentiment, but pay special attention to exaggerated complaints, sarcasm, or over-the-top expectations. Look for inconsistencies, contradictions, and absurd demands that indicate the reviewer is being unreasonable or overly dramatic. The sentiment may still be negative, but the tone could be comically disproportionate to the situation. Consider the language used, such as hyperbole, or any signs that the reviewer has unrealistic expectations of the service or product. Reviews: `;
         const result = await model.generateContent(instructions + prompt);
         const response = await result.response;
         return response.text();
@@ -109,6 +109,30 @@ const resolvers = {
         throw new Error("Failed to match volunteers.");
       }
     },
+
+    engagementAnalysis: async (_, { prompt, size }) => {
+      try {
+        // Validate input
+        if (!prompt || typeof prompt !== 'string' || prompt.trim() === '') {
+          throw new Error("Invalid prompt. Please provide a valid string.");
+        }
+        if (!size || typeof size !== 'number' || size <= 0) {
+          throw new Error("Invalid size. Please provide a positive integer.");
+        }
+
+        // Perform engagement analysis
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const instructions1 = `In ${size} characters, based on local engagement patterns in the Greater Toronto and Surrounding Area (GTA), analyze the likely turnout and community interaction level for the following event: `;
+        const instructions2 = ` Using historical engagement trends, day-of-week preferences, time-of-day behaviors, and local seasonal patterns, identify the most optimal time slot for maximum participation. Include (1) the predicted engagement level for each option (e.g., High / Moderate / Low), (2) a recommended option with a short explanation, and (3) key factors influencing the outcome (e.g., weather seasonality, work schedules, school calendar, past event behavior, etc.)`;
+        const result = await model.generateContent(instructions1 + prompt + instructions2);
+        const response = await result.response;
+        return response.text();
+      } catch (error) {
+        console.error("Error in engagementAnalysis:", error);
+        throw new Error("Failed to analyze engagement.");
+      }
+    }
+
   },
 };
 
@@ -145,6 +169,10 @@ mutation {
     volunteers: "John Doe: Experienced in teaching Python. Jane Smith: Skilled in JavaScript and web development. Alex Johnson: Beginner in programming but eager to help.",
     size: 200
   )
+}
+
+mutation {
+  engagementAnalysis(prompt: "Parkinson's Walk for the Cure fundraising event taking place at Earl Bales Park, Toronto", size: 150)
 }
 
 */
