@@ -36,26 +36,21 @@ function App() {
   }, [navigate]);
 
   return (
-    <div className="container mt-3">
+    <div className="app-container">
       <Header />
-      <h1 className="text-center">🏡 Community Engagement Platform</h1>
-      {/* Add an image below the title */}
-    <div className="text-center">
-      <img
-        src="/src/assets/Community-Hub.png" // Replace with the actual image path
-        alt="Community Engagement Hub"
-        className="img-fluid my-3"
-        style={{ objectFit: "cover" }}
-      />
-    </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/auth/*" element={<AuthApp />} />
-          <Route path="/community/*" element={<CommunityApp />} />
-          <Route path="*" element={<h3 className="text-center">Welcome! Please explore our Community Services.</h3>} />
-        </Routes>
-      </Suspense>
-      <Footer />
+      <div className="content-container">
+        <h1 className="text-center">🏡 Community Engagement Platform</h1>
+        <div className="main-content">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/auth/*" element={<AuthApp />} />
+              <Route path="/community/*" element={<CommunityApp />} />
+              <Route path="*" element={<h3 className="text-center">Welcome! Please explore our Community Services.</h3>} />
+            </Routes>
+          </Suspense>
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 }

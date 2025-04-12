@@ -1,39 +1,95 @@
 /* shell-app/src/App.css */
-#root {
+
+/* Navbar wrapper to ensure consistent width */
+.navbar-wrapper {
+  width: 100%;
+  position: relative;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--bg-color);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Fixed width container for navbar to prevent width changes */
+.fixed-width-nav-container {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-color: var(--bg-color);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.fixed-width-nav-container .navbar {
+  width: 100%;
   max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Navbar styling for consistent sizing */
+.navbar {
+  min-height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  white-space: nowrap;
+  margin-right: 1rem;
+  transition: color var(--transition-speed);
+}
+
+.navbar-collapse {
+  display: flex;
+  flex-basis: auto;
+  flex-grow: 1;
+  align-items: center;
+}
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.content-container {
+  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.main-content {
+  flex: 1;
 }
 
 html, body {
   background-color: var(--bg-color);
   color: var(--text-color);
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .footer {
@@ -64,10 +120,12 @@ html, body {
 [data-theme="dark"] .navbar-brand,
 [data-theme="dark"] .navbar-nav .nav-link {
   color: #f0f0f0 !important; /* White-ish text */
+  transition: color var(--transition-speed);
 }
 
 [data-theme="dark"] .nav-link.disabled {
   color: #888 !important; /* softer for disabled items */
+  transition: color var(--transition-speed);
 }
 
 [data-theme="dark"] .btn-outline-secondary {
@@ -78,6 +136,142 @@ html, body {
 [data-theme="dark"] .btn-outline-secondary:hover {
   background-color: #666;
   border-color: #999;
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  z-index: 1001; /* Ensure it's above other elements */
+  position: relative;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 56px;
+  height: 28px;
+  position: relative;
+  border-radius: 24px;
+  outline: none;
+  transition: all var(--transition-speed) ease;
+}
+
+.toggle-track {
+  width: 100%;
+  height: 100%;
+  background-color: #4d4d4d;
+  border-radius: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  justify-content: space-between;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.theme-toggle.light .toggle-track {
+  background-color: #8abbff;
+}
+
+.toggle-sun, .toggle-moon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2px;
+  margin-right: 1px;
+  z-index: 1;
+}
+
+.toggle-sun svg, .toggle-moon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.toggle-sun {
+  color: #f9d71c;
+}
+
+.toggle-moon {
+  color: #f5f3ce;
+  opacity: 0.9;
+  /* Make moon brighter for better visibility */
+  filter: brightness(1.5);
+}
+
+.toggle-thumb {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  border-radius: 50%;
+  left: 2px;
+  transition: transform var(--transition-speed) ease, background-color var(--transition-speed);
+  box-shadow: 0 0 0 0.5px rgba(155, 155, 155, 0.5);
+}
+
+.theme-toggle.dark .toggle-thumb {
+  transform: translateX(28px);
+  background-color: #333; /* Darker thumb in dark mode */
+}
+
+/* Navbar center wrapper for middle content */
+.navbar-center-wrapper {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  margin: 0 15px;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 991px) {
+  .navbar-center-wrapper {
+    justify-content: flex-start;
+  }
+  
+  .theme-toggle-wrapper {
+    /* Keep toggle on the right */
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-brand {
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+  
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-color);
+    padding: 1rem;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-speed);
+  }
+  
+  [data-theme="dark"] .navbar-collapse {
+    background-color: var(--bg-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Fix hamburger icon color in dark mode */
+  [data-theme="dark"] .navbar-toggler-icon {
+    filter: invert(1);
+  }
+  
+  /* Ensure hamburger is in the middle */
+  .navbar-toggler {
+    margin: 0 auto;
+  }
 }
 
 .community-nav {
