@@ -73,7 +73,8 @@ const resolvers = {
 
         // Perform sentiment analysis
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const instructions = `In ${size} characters, perform a sentiment analysis with explanation on the following: `;
+        //const instructions = `In ${size} characters, perform a sentiment analysis with explanation on the following: `;
+        const instructions = `In ${size} characters, analyze the following reviews for sentiment, but pay special attention to exaggerated complaints, sarcasm, or over-the-top expectations. Look for inconsistencies, contradictions, and absurd demands that indicate the reviewer is being unreasonable or overly dramatic. The sentiment may still be negative, but the tone could be comically disproportionate to the situation. Consider the language used, such as hyperbole, or any signs that the reviewer has unrealistic expectations of the service or product. Reviews: `
         const result = await model.generateContent(instructions + prompt);
         const response = await result.response;
         return response.text();
