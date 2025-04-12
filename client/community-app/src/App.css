@@ -46,3 +46,12 @@
   background-color: #2196f3;
   color: white;
 }
+
+html, body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+hr {
+  margin: 3rem 1rem 2rem 1rem;
+}

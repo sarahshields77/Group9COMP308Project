@@ -9,7 +9,6 @@ import EventsPage from "./pages/EventsPage";
 import DiscussionsPage from "./pages/DiscussionPage";
 import HelpRequestsPage from "./pages/HelpRequestsPage";
 import BusinessPage from "./pages/BusinessPage";
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const client = new ApolloClient({

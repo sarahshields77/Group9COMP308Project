@@ -22,6 +22,12 @@
   --link-color: #90caf9;
 }
 
+/* fixes darkmode bug for first load and page refresh by overriding Bootstrap defaults */
+[data-theme="dark"] body {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
 body {
   margin: 0;
   padding: 0;
