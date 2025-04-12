@@ -45,7 +45,7 @@ function App() {
             <Routes>
               <Route path="/auth/*" element={<AuthApp />} />
               <Route path="/community/*" element={<CommunityApp />} />
-              <Route path="*" element={<h3 className="text-center">Welcome! Please explore our Community Services.</h3>} />
+              <Route path="*" element={<><h3 className="text-center">Welcome! Please explore our Community Services.</h3><img src="/src/assets/Community-Hub.png" width="60%" className="d-block mx-auto" alt="Community Engagement Hub" /></>} />
             </Routes>
           </Suspense>
         </div>
