@@ -7,7 +7,7 @@ function CommunityHub() {
   const navigate = useNavigate(); 
 
   return (
-    <div className="container text-center mt-5">
+    <div className="container text-center mt-4">
       <CommunityNav />
       <h1>🌍 Community Hub</h1>
       <p>Choose where you want to go:</p>

@@ -21,7 +21,7 @@ function EventsPage() {
   if (error) return <p className="text-center text-danger">Error loading events: {error.message}</p>;
 
   return (
-    <div className="container mt-5 text-center">
+    <div className="container mt-4 text-center">
       <h1>📅 Community Events</h1>
       <ul className="list-group">
         {data.getEvents.map((event, index) => (
