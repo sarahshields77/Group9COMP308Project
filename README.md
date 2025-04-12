@@ -9,7 +9,11 @@ Auth-App → Handles user authentication (JWT-based login/registration).
 Community-App → Manages local news, discussions, and help requests.
 Business-App → Allows local businesses to list services and interact.
 Events-App → Handles community events and volunteer matching.
-Shell-App → The main container that loads different micro-frontends dynamically.
+Shell-App → The main container that loads different micro-frontends dynamically.  
+AI Integrations:  
+   AI Summarization: Auto-generate summaries for long discussions.  
+   Sentiment Analysis: AI analyzes user posts and reviews.  
+   Neighbourhood Help Requests: AI matches volunteers based on their interests and location.
 
 ## Getting Started
 
@@ -77,12 +81,6 @@ npm run deploy  # For auth-app and community-app
 npm run dev     # For shell-app
 ```
  
-1. Coming Soon/TODO - AI Integrations:  
-   AI Summarization: Auto-generate summaries for long discussions.  
-   Sentiment Analysis: AI analyzes user posts and reviews.  
-   Note - The Gemini API can be used for both summarization and sentiment analysis  
-
-
 ### 📁 Project Structure  
 ```plaintext
 Group9COMP308Project/
