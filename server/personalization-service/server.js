@@ -74,7 +74,7 @@ const resolvers = {
 
         // Perform sentiment analysis
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const instructions = `In ${size} characters, analyze the following reviews for sentiment, but pay special attention to exaggerated complaints, sarcasm, or over-the-top expectations. Look for inconsistencies, contradictions, and absurd demands that indicate the reviewer is being unreasonable or overly dramatic. The sentiment may still be negative, but the tone could be comically disproportionate to the situation. Consider the language used, such as hyperbole, or any signs that the reviewer has unrealistic expectations of the service or product. Reviews: `;
+        const instructions = `In ${size} characters, analyze the following reviews for sentiment but, where applicable, pay special attention to exaggerated complaints, sarcasm, or over-the-top expectations. Look for inconsistencies, contradictions, and absurd demands that indicate the reviewer is being unreasonable or overly dramatic. The sentiment may still be negative, but the tone could be comically disproportionate to the situation. Consider the language used, such as hyperbole, or any signs that the reviewer has unrealistic expectations of the service or product. Reviews: `;
         const result = await model.generateContent(instructions + prompt);
         const response = await result.response;
         return response.text();
@@ -123,7 +123,7 @@ const resolvers = {
         // Perform engagement analysis
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         const instructions1 = `In ${size} characters, based on local engagement patterns in the Greater Toronto and Surrounding Area (GTA), analyze the likely turnout and community interaction level for the following event: `;
-        const instructions2 = ` Using historical engagement trends, day-of-week preferences, time-of-day behaviors, and local seasonal patterns, identify the most optimal time slot for maximum participation. Include (1) the predicted engagement level for each option (e.g., High / Moderate / Low), (2) a recommended option with a short explanation, and (3) key factors influencing the outcome (e.g., weather seasonality, work schedules, school calendar, past event behavior, etc.)`;
+        const instructions2 = ` Using historical engagement trends, day-of-week preferences, time-of-day behaviors, and local seasonal patterns, identify the most OPTIMAL SCHEDULING (month, day of week and time slot) for maximum participation. Also include a PREDICTED ENGAGEMENT for the date/time provided (if any), a GENERAL OVEVIEW with the predicted engagement level for different day/time options (e.g., high / moderate / low); a RECOMMENDED OPTION with an explanation; and KEY FACTORS influencing the outcome (e.g., weather seasonality, work schedules, school calendar, past event behavior, etc.) Capitalize section headings and no asterisks. Use the following format: \n\nPREDICTED ENGAGEMENT: \n\nGENERAL OVERVIEW: \n\nRECOMMENDED OPTION: \n\nKEY FACTORS: \n\nEvent: `;
         const result = await model.generateContent(instructions1 + prompt + instructions2);
         const response = await result.response;
         return response.text();
@@ -176,4 +176,3 @@ mutation {
 }
 
 */
-

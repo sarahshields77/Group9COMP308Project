@@ -21,8 +21,18 @@ module.exports = {
     addDeal: async (_, { title, description, businessId, validUntil }) => {
       return await new Deal({ title, description, businessId, validUntil }).save();
     },
-    addEvent: async (_, { title, description, location, date, organizerId }) => {
-      return await new Event({ title, description, location, date, organizerId }).save();
+    addEvent: async (_, { id, title, description, location, date, organizerId }) => {
+      if (id) {
+        // 👇 Update existing event
+        return await Event.findByIdAndUpdate(
+          id,
+          { title, description, location, date, organizerId },
+          { new: true }
+        );
+      } else {
+        // 👇 Create new event
+        return await new Event({ title, description, location, date, organizerId }).save();
+      }
     },
     addReview: async (_, { businessId, author, text, rating }) => {
       return await new Review({ businessId, author, text, rating }).save();

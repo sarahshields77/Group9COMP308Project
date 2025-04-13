@@ -1,38 +1,102 @@
-// client/community-app/src/EventsPage.jsx
-import React from "react";
+// client/community-app/src/pages/EventsPage.jsx
+import React, { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
+import useUser from "../hooks/useUser";
+import { businessClient } from "../apolloClients";
+import CommunityNav from "../components/Shared/CommunityNav";
+import EventForm from "../components/Events/EventForm";
 
 const GET_EVENTS = gql`
   query GetEvents {
     getEvents {
-      name
-      date
+      id
+      title
+      description
       location
+      date
+      createdAt
     }
   }
 `;
 
 function EventsPage() {
-  const navigate = useNavigate();
-  const { loading, error, data } = useQuery(GET_EVENTS);
+  const user = useUser();
+  const [showForm, setShowForm] = useState(false);
+  const [editEvent, setEditEvent] = useState(null);
+  const { loading, error, data, refetch } = useQuery(GET_EVENTS, {
+    client: businessClient,
+  });
 
-  if (loading) return <p className="text-center">Loading events...</p>;
-  if (error) return <p className="text-center text-danger">Error loading events: {error.message}</p>;
+  if (loading) return <p>Loading events...</p>;
+  if (error) {
+    console.error("❌ GraphQL Error:", error);
+    return <p className="text-danger">Error loading events: {error.message}</p>;
+  }
 
   return (
-    <div className="container mt-4 text-center">
-      <h1>📅 Community Events</h1>
+    <div className="container mt-4">
+      <CommunityNav />
+      <h2>📅 Community Events</h2>
+
+      {user?.role === "CommunityOrganizer" && (
+        <>
+          <button
+            className="btn btn-primary mb-3"
+            onClick={() => {
+              setShowForm(!showForm);
+              setEditEvent(null); // Reset editing mode
+            }}
+          >
+            {showForm ? "➖ Cancel" : "➕ Create New Event"}
+          </button>
+          {showForm && (
+            <EventForm
+              onCreatedOrUpdated={() => {
+                setShowForm(false);
+                setEditEvent(null);
+                refetch();
+              }}
+              initialEvent={editEvent}
+            />
+          )}
+        </>
+      )}
+
       <ul className="list-group">
-        {data.getEvents.map((event, index) => (
-          <li key={index} className="list-group-item">
-            <h3>{event.name}</h3>
-            <p><strong>Date:</strong> {event.date}</p>
-            <p><strong>Location:</strong> {event.location}</p>
+        {data.getEvents.map((event) => (
+          <li key={event.id} className="list-group-item mb-3">
+            <h5>{event.title}</h5>
+            <p>{event.description}</p>
+            <p>
+              <strong>📍 Location:</strong> {event.location}
+            </p>
+            <p>
+              <strong>📆 Date:</strong>{" "}
+              {new Date(Number(event.date)).toLocaleString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true,
+              })}
+            </p>
+
+            {user?.role === "CommunityOrganizer" && (
+              <button
+                className="btn btn-sm btn-outline-secondary"
+                onClick={() => {
+                  setEditEvent(event);
+                  setShowForm(true);
+                }}
+              >
+                ✏️ Edit
+              </button>
+            )}
           </li>
         ))}
       </ul>
-      <button className="btn btn-secondary mt-3" onClick={() => navigate(-1)}>⬅ Back</button>
     </div>
   );
 }
