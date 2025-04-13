@@ -10,7 +10,8 @@ export default defineConfig({
       name: "shellApp",
       remotes: {
         authApp: "http://localhost:3001/assets/remoteEntry.js",
-        communityApp: "http://localhost:3002/assets/remoteEntry.js"
+        communityApp: "http://localhost:3002/assets/remoteEntry.js",
+        eventsApp: "http://localhost:3003/assets/remoteEntry.js",
       },
       shared: {
         react: { singleton: true, requiredVersion: "^19.0.0" },

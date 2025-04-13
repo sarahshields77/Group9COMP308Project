@@ -9,6 +9,7 @@ import useUserRole from "./hooks/useUserRole.jsx";
 
 const AuthApp = lazy(() => import("authApp/App"));
 const CommunityApp = lazy(() => import("communityApp/App"));
+const EventsApp = lazy(() => import("eventsApp/App"));
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -45,6 +46,7 @@ function App() {
             <Routes>
               <Route path="/auth/*" element={<AuthApp />} />
               <Route path="/community/*" element={<CommunityApp />} />
+              <Route path="/events/*" element={<EventsApp />} />
               <Route path="*" element={<><h3 className="text-center">Welcome! Please explore our Community Services.</h3><img src="/src/assets/Community-Hub.png" width="60%" className="d-block mx-auto" alt="Community Engagement Hub" /></>} />
             </Routes>
           </Suspense>
