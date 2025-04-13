@@ -4,13 +4,14 @@ const Discussion = require("../models/Discussion");
 const HelpRequest = require("../models/HelpRequest");
 const Reply = require("../models/Reply");
 const Volunteer = require("../models/Volunteer");
+const EmergencyAlert = require("../models/EmergencyAlert")
 
 module.exports = {
   Query: {
     getNews: async () => {
       const newsItems = await News.find().sort({ createdAt: -1 });
       return newsItems.map(item => ({
-        id: item._id.toString(), 
+        id: item._id.toString(),
         title: item.title,
         content: item.content,
         createdAt: item.createdAt.toISOString()
@@ -21,7 +22,10 @@ module.exports = {
     getReplies: async (_, { discussionId }) => {
       return await Reply.find({ discussionId }).sort({ createdAt: 1 });
     },
-    getVolunteers: async () => await Volunteer.find()
+    getVolunteers: async () => await Volunteer.find(),
+    getEmergencyAlerts: async () => {
+      return await EmergencyAlert.find();
+    }
   },
   Mutation: {
     addNews: async (_, { title, content }) => {
@@ -39,6 +43,15 @@ module.exports = {
     addReply: async (_, { discussionId, author, message }) => {
       const reply = new Reply({ discussionId, author, message });
       return await reply.save();
-    }
+    },
+    createEmergencyAlert: async (_, { message }) => {
+      const newEmergencyAlert = new EmergencyAlert({ message });
+      await newEmergencyAlert.save();
+      return newEmergencyAlert;
+    },
+    resolveEmergencyAlert: async (_, { id }) => {
+      const emergencyAlert = await EmergencyAlert.findByIdAndUpdate(id, { resolved: true }, { new: true });
+      return emergencyAlert;
+    },
   }
 };

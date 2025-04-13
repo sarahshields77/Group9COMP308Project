@@ -77,4 +77,19 @@ module.exports = gql`
     getVolunteers: [Volunteer]
   }
 
+  type EmergencyAlert {
+    id: ID!
+    message: String!
+    resolved: Boolean!
+    createdAt: String!
+  }
+
+  type Query {
+    getEmergencyAlerts: [EmergencyAlert]
+  }
+
+  type Mutation {
+    createEmergencyAlert(message: String!): EmergencyAlert
+    resolveEmergencyAlert(id: ID!): EmergencyAlert
+  }
 `;

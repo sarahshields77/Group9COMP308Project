@@ -10,6 +10,7 @@ import DiscussionsPage from "./pages/DiscussionPage";
 import HelpRequestsPage from "./pages/HelpRequestsPage";
 import BusinessPage from "./pages/BusinessPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import EmergencyAlertsPage from "./components/EmergencyAlerts/EmergencyAlert";
 
 const client = new ApolloClient({
   uri: "http://localhost:4002/graphql",
@@ -20,7 +21,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={communityClient}>
-      <BrowserRouter basename="/community">  
+      <BrowserRouter basename="/community">
         <Routes>
           <Route path="/" element={<CommunityHub />} />
           <Route path="/news" element={<NewsPage />} />
@@ -28,6 +29,7 @@ function App() {
           <Route path="/business" element={<BusinessPage />} />
           <Route path="/discussions" element={<DiscussionsPage />} />
           <Route path="/help" element={<HelpRequestsPage />} />
+          <Route path="/emergencies" element={<EmergencyAlertsPage />} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>

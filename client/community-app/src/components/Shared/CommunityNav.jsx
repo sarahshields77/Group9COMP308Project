@@ -2,7 +2,8 @@
 
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./CommunityNav.css"; 
+import "./CommunityNav.css";
+import EmergencyAlertsPage from "../EmergencyAlerts/EmergencyAlert";
 
 export default function CommunityNav() {
   return (
@@ -22,6 +23,9 @@ export default function CommunityNav() {
       <NavLink to="/business" className="nav-item">
         🏪 <span>Local Businesses</span>
       </NavLink>
+      <div className="nav-item">
+        <EmergencyAlertsPage />
+      </div>
     </nav>
   );
 }
