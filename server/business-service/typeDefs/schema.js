@@ -51,7 +51,7 @@ module.exports = gql`
   type Mutation {
     addBusiness(name: String!, description: String, location: String, ownerId: String!, imageUrl: String): Business
     addDeal(title: String!, description: String, businessId: ID!, validUntil: String): Deal
-    addEvent(title: String!, description: String, location: String, date: String, organizerId: String!): Event
+    addEvent(id: ID, title: String!, description: String, location: String, date: String, organizerId: String!): Event
     addReview(businessId: ID!, author: String!, text: String!, rating: Int!): Review
     replyToReview(reviewId: ID!, reply: String!): Review
   }

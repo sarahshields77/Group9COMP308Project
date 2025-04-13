@@ -44,7 +44,7 @@ function Header() {
                   <Link className="nav-link" to="/community">Community</Link>
                 </li>
                 <li className="nav-item">
-                  <span className="nav-link disabled">Events</span>
+                  <Link className="nav-link" to="/community/events">Events</Link>
                 </li>
                 <li className="nav-item">
                   <span
