@@ -60,41 +60,38 @@ function EventForm({ onCreatedOrUpdated, initialEvent }) {
         });
         setIsCancelled(initialEvent.title.startsWith("🚫 Cancelled:"));
       }
-    }, [initialEvent]);
+  }, [initialEvent]);
 
-    const [submitEvent, { loading, error }] = useMutation(ADD_OR_UPDATE_EVENT, {
-      client: businessClient,
-    });
+  const [submitEvent, { loading, error }] = useMutation(ADD_OR_UPDATE_EVENT, {
+    client: businessClient,
+  });
 
-    //////////////
-    const handleChange = (e) => {
-      setForm({ ...form, [e.target.name]: e.target.value });
-    };
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
   
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
   
-      const finalTitle = isCancelled ? `🚫 CANCELLED: ${form.title}` : form.title;
+    const finalTitle = isCancelled ? `🚫 CANCELLED: ${form.title}` : form.title;
   
-      try {
-        await submitEvent({
-          variables: {
-            id: initialEvent?.id,
-            title: finalTitle,
-            description: form.description,
-            location: form.location,
-            date: form.date,
-            organizerId: user?.id || "test-organizer-1",
-          },
-        });
-        alert(`✅ Event ${isEditMode ? "updated" : "created"} successfully!`);
-        if (onCreatedOrUpdated) onCreatedOrUpdated();
-      } catch (err) {
-        console.error("❌ Submission error:", err.message);
-      }
-    };
-    //////////////
-
+    try {
+      await submitEvent({
+        variables: {
+          id: initialEvent?.id,
+          title: finalTitle,
+          description: form.description,
+          location: form.location,
+          date: form.date,
+          organizerId: user?.id || "test-organizer-1",
+        },
+      });
+      alert(`✅ Event ${isEditMode ? "updated" : "created"} successfully!`);
+      if (onCreatedOrUpdated) onCreatedOrUpdated();
+    } catch (err) {
+      console.error("❌ Submission error:", err.message);
+    }
+  };
   
 
   const [getEngagementAnalysis, { loading: analysisLoading }] = useMutation(ENGAGEMENT_ANALYSIS, {
@@ -115,7 +112,7 @@ function EventForm({ onCreatedOrUpdated, initialEvent }) {
       getEngagementAnalysis({
         variables: {
           prompt,
-          size: 300, // Adjust size as needed
+          size: 500, // Adjust size as needed
         },
       });
     } else {
@@ -193,12 +190,12 @@ function EventForm({ onCreatedOrUpdated, initialEvent }) {
 
       <button
         type="button"
-        className="btn btn-info mb-3"
+        className="btn btn-secondary"
         onClick={handleEngagementAnalysis}
         disabled={analysisLoading}
       >
         {analysisLoading ? "Analyzing..." : "Get Engagement Analysis"}
-      </button>
+      </button>&nbsp;
 
       {engagementAnalysisResult && (
         <div className="alert alert-primary mt-3">
