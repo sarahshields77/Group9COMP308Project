@@ -101,7 +101,11 @@ export default function DiscussionList() {
 
               <button
                 className="btn btn-sm btn-outline-secondary mt-2"
-                onClick={() => toggleReplyForm(item.id)}
+                onClick={() =>
+                  setActiveReplyForm((prev) =>
+                    prev === item.id ? null : item.id
+                  )
+                }
               >
                 {activeReplyForm === item.id ? "Cancel" : "Reply"}
               </button>
