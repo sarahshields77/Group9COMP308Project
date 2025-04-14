@@ -226,11 +226,8 @@ export default function BusinessList() {
             <h5 className="card-title">{biz.name}</h5>
             <p className="card-text">{biz.description}</p>
             <p><strong>Location:</strong> {biz.location}</p>
-            <p><strong>Owner:</strong> {biz.ownerId}</p>
-  
-            {/* Add DealsList just above reviews */}
-            <DealsList businessId={biz.id} />
-  
+            <p><strong>Owner:</strong> {biz.name}</p>
+
             {user?.role === "Resident" && (
               <div className="text-center">
                 <button
