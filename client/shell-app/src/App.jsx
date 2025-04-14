@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     const handleRedirect = (event) => {
       console.log(event.detail)
-      navigate(event.detail.path);
+      window.location.href = event.detail.path;
     };
     // alert("app.jsx useEffect")
     window.addEventListener('redirect', handleRedirect);
