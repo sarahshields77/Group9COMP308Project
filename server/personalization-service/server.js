@@ -51,7 +51,7 @@ const resolvers = {
         }
 
         // Generate the summary
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
         const instructions = `In ${size} characters, summarize the following: `;
         const result = await model.generateContent(instructions + prompt);
         const response = await result.response;
