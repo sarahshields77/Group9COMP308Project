@@ -33,6 +33,17 @@ const GET_REVIEWS = gql`
   }
 `;
 
+const GET_DEALS = gql`
+  query GetDeals($businessId: ID!) {
+    getDeals(businessId: $businessId) {
+      id
+      title
+      description
+      validUntil
+    }
+  }
+`;
+
 const REPLY_TO_REVIEW = gql`
   mutation ReplyToReview($reviewId: ID!, $reply: String!) {
     replyToReview(reviewId: $reviewId, reply: $reply) {
@@ -163,6 +174,34 @@ function ReviewsList({ businessId, currentUser, ownerId }) {
   );
 }
 
+function DealsList({ businessId }) {
+  const { data, loading, error } = useQuery(GET_DEALS, {
+    variables: { businessId },
+    client: businessClient,
+  });
+
+  if (loading) return <p>Loading deals...</p>;
+  if (error) return <p>Error loading deals.</p>;
+
+  if (!data.getDeals.length) return <p>No deals available at the moment.</p>;
+
+  return (
+    <div className="mt-3">
+      <h5>💸 Current Deals</h5>
+      {data.getDeals.map((deal) => (
+        <div key={deal.id} className="border p-2 rounded mb-2">
+          <p><strong>{deal.title}</strong></p>
+          <p>{deal.description}</p>
+          {deal.validUntil && (
+            <small className="text-muted">Valid until: {new Date(deal.validUntil).toLocaleDateString()}</small>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+
 export default function BusinessList() {
   const { data, loading, error } = useQuery(GET_BUSINESSES, { client: businessClient });
   const user = useUser();
@@ -188,7 +227,10 @@ export default function BusinessList() {
             <p className="card-text">{biz.description}</p>
             <p><strong>Location:</strong> {biz.location}</p>
             <p><strong>Owner:</strong> {biz.ownerId}</p>
-
+  
+            {/* Add DealsList just above reviews */}
+            <DealsList businessId={biz.id} />
+  
             {user?.role === "Resident" && (
               <div className="text-center">
                 <button
@@ -202,10 +244,11 @@ export default function BusinessList() {
                 </button>
               </div>
             )}
-
+  
             {visibleReviewFormId === biz.id && (
               <ReviewForm businessId={biz.id} onClose={() => setVisibleReviewFormId(null)} />
             )}
+  
             <ReviewsList businessId={biz.id} currentUser={user} ownerId={biz.ownerId} />
           </div>
         </div>

@@ -43,7 +43,7 @@ module.exports = gql`
 
   type Query {
     getBusinesses: [Business]
-    getDeals: [Deal]
+    getDeals(businessId: ID!): [Deal]
     getEvents: [Event]
     getReviews(businessId: ID!): [Review]  # <-- filtered by business
   }

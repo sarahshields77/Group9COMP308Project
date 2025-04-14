@@ -1,4 +1,4 @@
-// client/community-app/src/components/Businesses/BusinessForm.jsx
+// client/community-app/src/components/Businesses/BusinessDealsForm.jsx
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { businessClient } from "../../apolloClients";

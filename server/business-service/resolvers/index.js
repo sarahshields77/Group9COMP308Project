@@ -7,7 +7,9 @@ const Review = require("../models/Review");
 module.exports = {
   Query: {
     getBusinesses: async () => await Business.find().sort({ createdAt: -1 }),
-    getDeals: async () => await Deal.find().sort({ createdAt: -1 }),
+    getDeals: async (_, { businessId }) => {
+      return await Deal.find({ businessId }).sort({ createdAt: -1 });
+    },    
     getEvents: async () => await Event.find().sort({ date: 1 }),
     getReviews: async (_, { businessId }) => {
       return await Review.find({ businessId }).sort({ createdAt: -1 });
