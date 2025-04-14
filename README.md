@@ -61,6 +61,7 @@ This will concurrently start all backend and frontend services:
 - Shell App: http://localhost:3000/
 - Auth App: http://localhost:3001/
 - Community App: http://localhost:3002/
+- Events App: http://localhost:3003/
 
 ### 🛠️ Alternative Setup (Manual Method)
 
@@ -94,7 +95,7 @@ Group9COMP308Project/
 │   ├── shell-app/  (Main app that loads micro frontends)
 │   ├── auth-app/  (Authentication & User Management micro frontend)
 │   ├── community-app/  (Community & Business Engagement micro frontend)
-│   ├── events-app/  (Events & Administration micro frontend) [TODO]
+│   ├── events-app/  (Events & Administration micro frontend) 
 │
 │── .gitignore
 │── package.json
