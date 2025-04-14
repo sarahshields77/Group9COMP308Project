@@ -14,7 +14,7 @@
     "start:events-app": "cd client/events-app && npm run deploy",
     "start:shell-app": "cd client/shell-app && npm run dev",
     "install-backend": "npm install --prefix server/auth-service && npm install --prefix server/community-service && npm install --prefix server/business-service && npm install --prefix server/personalization-service",
-    "install-frontend": "npm install --prefix client/auth-app && npm install --prefix client/community-app && npm install --prefix client/shell-app",
+    "install-frontend": "npm install --prefix client/auth-app && npm install --prefix client/community-app && npm install --prefix client/shell-app && npm install --prefix client/events-app",
     "install-all": "npm install && npm run install-backend && npm run install-frontend"
   },
   "devDependencies": {
