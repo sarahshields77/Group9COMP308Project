@@ -61,6 +61,7 @@ This will concurrently start all backend and frontend services:
 - Shell App: http://localhost:3000/
 - Auth App: http://localhost:3001/
 - Community App: http://localhost:3002/
+- Events App: http://localhost:3003/
 
 ### 🛠️ Alternative Setup (Manual Method)
 
