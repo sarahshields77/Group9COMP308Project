@@ -95,7 +95,7 @@ Group9COMP308Project/
 │   ├── shell-app/  (Main app that loads micro frontends)
 │   ├── auth-app/  (Authentication & User Management micro frontend)
 │   ├── community-app/  (Community & Business Engagement micro frontend)
-│   ├── events-app/  (Events & Administration micro frontend) [TODO]
+│   ├── events-app/  (Events & Administration micro frontend) 
 │
 │── .gitignore
 │── package.json
