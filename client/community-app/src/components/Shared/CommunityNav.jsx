@@ -4,6 +4,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./CommunityNav.css";
 import EmergencyAlertsPage from "../EmergencyAlerts/EmergencyAlert";
+import { ApolloProvider } from "@apollo/client";
+import { communityClient } from "../../apolloClients";
 
 export default function CommunityNav() {
   return (
@@ -24,7 +26,9 @@ export default function CommunityNav() {
         🏪 <span>Local Businesses</span>
       </NavLink>
       <div className="nav-item">
-        <EmergencyAlertsPage />
+      <ApolloProvider client={communityClient}>
+          <EmergencyAlertsPage />
+        </ApolloProvider>
       </div>
     </nav>
   );
